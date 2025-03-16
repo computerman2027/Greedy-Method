@@ -1,85 +1,83 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 typedef struct currency
 {
     int val;
     int index;
     int noOfUnits;
-}Currency;
+} Currency;
 
-void sort(Currency* arr,int n)
+void sort(Currency *arr, int n)
 {
-    int i,j;
+    int i, j;
     Currency temp;
-    for(i=0;i<n-1;i++)
+    for (i = 0; i < n - 1; i++)
     {
-        for(j=0;j<n-i-1;j++)
+        for (j = 0; j < n - i - 1; j++)
         {
-            if(arr[j].val<arr[j+1].val)
+            if (arr[j].val < arr[j + 1].val)
             {
-                temp=arr[j];
-                arr[j]=arr[j+1];
-                arr[j+1]=temp;
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
             }
         }
     }
 }
 
-int coinChange(Currency* arr, int n, int target)
+int coinChange(Currency *arr, int n, int target)
 {
-    sort(arr,n);
+    sort(arr, n);
     int i;
-    for(i=0;i<n;i++)
+    for (i = 0; i < n; i++)
     {
-        arr[i].noOfUnits=target/arr[i].val;
-        target=target%arr[i].val;
+        arr[i].noOfUnits = target / arr[i].val;
+        target = target % arr[i].val;
     }
-    if(target==0)
-    return 0;
+    if (target == 0)
+        return 0;
     else
-    return -1;
+        return -1;
 }
 
 int main()
 {
-    int n,i,target;
+    int n, i, target;
     printf("Enter no of denomination : ");
-    scanf("%d",&n);
+    scanf("%d", &n);
 
-    Currency* denominations = (Currency*)malloc(n*sizeof(Currency));
+    Currency *denominations = (Currency *)malloc(n * sizeof(Currency));
 
     printf("Enter the Denominations : ");
-    for(i=0;i<n;i++)
+    for (i = 0; i < n; i++)
     {
-        scanf("%d",&denominations[i].val);
-        denominations[i].index=i;
-        denominations[i].noOfUnits=0;
+        scanf("%d", &denominations[i].val);
+        denominations[i].index = i;
+        denominations[i].noOfUnits = 0;
     }
 
     printf("Enter target : ");
-    scanf("%d",&target);
+    scanf("%d", &target);
 
-    
+    int result = coinChange(denominations, n, target);
 
-    int result=coinChange(denominations,n,target);
-
-    if(result==-1)
+    if (result == -1)
     {
         printf("Not possible to reach target value\n");
     }
     else
     {
-        int* ans = (int*)calloc(n,sizeof(int));
-        for(i =0;i<n;i++)
+        int *ans = (int *)calloc(n, sizeof(int));
+        for (i = 0; i < n; i++)
         {
-            ans[denominations[i].index]=denominations[i].noOfUnits;
+            ans[denominations[i].index] = denominations[i].noOfUnits;
         }
         printf("Ans vector : ");
-        for(i=0;i<n;i++)
+        for (i = 0; i < n; i++)
         {
-            printf("%d ",ans[i]);
+            printf("%d ", ans[i]);
         }
     }
     return 0;

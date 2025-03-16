@@ -62,18 +62,18 @@ int main()
         scanf("%d", &activities[i][2]);
     }
 
-    activitySelector(activities,n);
+    activitySelector(activities, n);
 
-    int* ans = (int*)calloc(n,sizeof(int));
-    for(i=0;i<n;i++)
+    int *ans = (int *)calloc(n, sizeof(int));
+    for (i = 0; i < n; i++)
     {
-        ans[activities[i][0]]=activities[i][3];
+        ans[activities[i][0]] = activities[i][3];
     }
 
     printf("Ans Vector : ");
-    for(i=0;i<n;i++)
+    for (i = 0; i < n; i++)
     {
-        printf("%d ",ans[i]);
+        printf("%d ", ans[i]);
     }
     printf("\n");
     return 0;

@@ -33,20 +33,20 @@ int knapsack(Obj *arr, int n, float maxw)
 {
     sort(arr, n);
     int i;
-    for(i=0;i<n;i++)
+    for (i = 0; i < n; i++)
     {
-        if(maxw/arr[i].weight>=1)
+        if (maxw / arr[i].weight >= 1)
         {
-            arr[i].contribution=1;
-            maxw-=arr[i].weight;
+            arr[i].contribution = 1;
+            maxw -= arr[i].weight;
         }
         else
         {
-            arr[i].contribution=maxw/arr[i].weight;
-            maxw=0;
+            arr[i].contribution = maxw / arr[i].weight;
+            maxw = 0;
         }
-        if(maxw==0)
-        return 0;
+        if (maxw == 0)
+            return 0;
     }
     return -1;
 }
@@ -75,23 +75,23 @@ int main()
     printf("enter max weight of knapsack : ");
     scanf("%f", &maxweight);
 
-    int result= knapsack(objs,n,maxweight);
+    int result = knapsack(objs, n, maxweight);
 
-    if(result==-1)
+    if (result == -1)
     {
         printf("Not possible\n");
     }
     else
     {
-        float* ans = (float*)calloc(n,sizeof(float));
-        for(i =0;i<n;i++)
+        float *ans = (float *)calloc(n, sizeof(float));
+        for (i = 0; i < n; i++)
         {
-            ans[objs[i].index]=objs[i].contribution;
+            ans[objs[i].index] = objs[i].contribution;
         }
         printf("Ans vector : ");
-        for(i=0;i<n;i++)
+        for (i = 0; i < n; i++)
         {
-            printf("%f ",ans[i]);
+            printf("%f ", ans[i]);
         }
     }
     return 0;
